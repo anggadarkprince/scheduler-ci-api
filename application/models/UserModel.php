@@ -8,14 +8,114 @@
  */
 class UserModel extends CI_Model
 {
+    private $table = 'users';
+
+    private $pk = 'id';
+
+    private $username = 'username';
+
     public function __construct()
     {
-
+        parent::__construct();
     }
 
     public static function isValidToken($token)
     {
+        $CI = get_instance();
+        $result = $CI->db->query("
+            SELECT *
+            FROM users
+            WHERE token = $token
+        ");
 
+        if ($result != null) {
+            return true;
+        }
+        return false;
     }
 
+    public function login($username, $password, $oncheck = false)
+    {
+        $this->db->bind("username", $username);
+        $this->db->bind("password", md5($password));
+
+        $user = $this->db->row("
+            SELECT *
+            FROM users
+            WHERE username = '$username'
+            AND password = '$password'
+        ");
+
+        if ($oncheck) {
+            return $user;
+        }
+
+        $this->session->set_userdata('sch_id', $user['id']);
+        $this->session->set_userdata('sch_token', $user['token']);
+        $this->session->set_userdata('sch_username', $user['username']);
+        $this->session->set_userdata('sch_name', $user['name']);
+
+        return $user;
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('sch_id');
+        $this->session->unset_userdata('sch_token');
+        $this->session->unset_userdata('sch_username');
+        $this->session->unset_userdata('sch_name');
+    }
+
+    public function getUser()
+    {
+        $result = $this->db->get($this->table);
+        return $result;
+    }
+
+    public function checkAvailability($username)
+    {
+        $result = $this->db->query("
+            SELECT *
+            FROM users
+            WHERE username = '$username'
+        ");
+
+        if ($result->num_rows() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public function registerUser($data)
+    {
+        return $this->db->insert($this->table, $data);
+
+        return false;
+    }
+
+    public function getOneUserById($id)
+    {
+        $result = $this->db->get_where($this->table, [$this->pk => $id]);
+
+        return $result->row_array();
+    }
+
+    public function getOneUserByUsername($username)
+    {
+        $result = $this->db->get_where($this->table, [$this->username => $username]);
+
+        return $result->row_array();
+    }
+
+    public function updateUser($data, $id)
+    {
+        $this->db->where($this->pk, $id);
+
+        return $this->db->update($this->table, $data);
+    }
+
+    public function deleteUser($id)
+    {
+        return $this->db->delete($this->table, [$this->pk => $id]);
+    }
 }

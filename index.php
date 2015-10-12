@@ -25,6 +25,7 @@
 	define('STATUS_RESTRICT', 'restrict');
 	define('STATUS_GRANTED', 'granted');
 	define('STATUS_DENIED', 'denied');
+	define('STATUS_MISMATCH', 'mismatch');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
