@@ -19,6 +19,12 @@
  *
  */
 	define('ENVIRONMENT', 'development');
+
+	define('STATUS_SUCCESS', 'success');
+	define('STATUS_FAILED', 'failed');
+	define('STATUS_RESTRICT', 'restrict');
+	define('STATUS_GRANTED', 'granted');
+	define('STATUS_DENIED', 'denied');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
