@@ -8,7 +8,7 @@
  */
 class ScheduleModel extends CI_Model
 {
-    private $table = 'schedule';
+    private $table = 'schedules';
 
     private $pk = 'id';
 
