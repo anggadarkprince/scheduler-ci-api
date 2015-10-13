@@ -25,37 +25,38 @@ class UserModel extends CI_Model
         $result = $CI->db->query("
             SELECT *
             FROM users
-            WHERE token = $token
+            WHERE token = '$token'
         ");
 
-        if ($result != null) {
+        if ($result->num_rows() != 0) {
             return true;
         }
         return false;
     }
 
-    public function login($username, $password, $oncheck = false)
+    public function login($username, $password, $on_check = false)
     {
-        $this->db->bind("username", $username);
-        $this->db->bind("password", md5($password));
-
-        $user = $this->db->row("
+        $user = $this->db->query("
             SELECT *
             FROM users
             WHERE username = '$username'
             AND password = '$password'
         ");
 
-        if ($oncheck) {
-            return $user;
+        $data = $user->row_array();
+
+        if ($on_check) {
+            return $data;
         }
 
-        $this->session->set_userdata('sch_id', $user['id']);
-        $this->session->set_userdata('sch_token', $user['token']);
-        $this->session->set_userdata('sch_username', $user['username']);
-        $this->session->set_userdata('sch_name', $user['name']);
+        if(!empty($data)){
+            $this->session->set_userdata('sch_id', $data['id']);
+            $this->session->set_userdata('sch_token', $data['token']);
+            $this->session->set_userdata('sch_username', $data['username']);
+            $this->session->set_userdata('sch_name', $data['name']);
+        }
 
-        return $user;
+        return $data;
     }
 
     public function logout()
@@ -69,7 +70,7 @@ class UserModel extends CI_Model
     public function getUser()
     {
         $result = $this->db->get($this->table);
-        return $result;
+        return $result->result_array();
     }
 
     public function checkAvailability($username)

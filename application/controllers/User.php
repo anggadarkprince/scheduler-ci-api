@@ -34,11 +34,13 @@ class User extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        if($this->user->login($username, $password)){
-            $result = ['status' => STATUS_SUCCESS];
+        $result = $this->user->login($username, md5($password));
+
+        if($result != null){
+            $result['status'] = STATUS_GRANTED;
         }
         else{
-            $result = ['status' => STATUS_FAILED];
+            $result = ['status' => STATUS_DENIED];
         }
         Util::encode($result);
     }
@@ -83,9 +85,9 @@ class User extends CI_Controller
             $username = $this->input->post('username');
             $password = $this->input->post('password');
 
-            $checkPassword = $this->user->login($username, $password);
+            $checkPassword = $this->user->login($username, md5($password));
 
-            if ($checkPassword) {
+            if ($checkPassword != null) {
                 if (!empty($this->input->post('password_new'))) {
                     $data['password'] = $this->input->post('password_new');
                 }
