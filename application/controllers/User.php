@@ -89,7 +89,7 @@ class User extends CI_Controller
 
             if ($checkPassword != null) {
                 if (!empty($this->input->post('password_new'))) {
-                    $data['password'] = $this->input->post('password_new');
+                    $data['password'] = md5($this->input->post('password_new'));
                 }
 
                 $update = $this->user->updateUser($data, $id);

@@ -51,7 +51,7 @@ class ScheduleModel extends CI_Model
             FROM schedules
             WHERE user_id = $user_id
             AND date >= CURRENT_DATE
-            ORDER BY date DESC, time DESC
+            ORDER BY date ASC, time ASC
         ");
 
         return $result->result_array();
