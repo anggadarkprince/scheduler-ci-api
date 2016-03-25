@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - jagamana@localhost" uuid="03627d6d-6a66-47e6-a649-42ccc4c9a69a">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>jagamana.*</schema-pattern>
+      <default-schemas>jagamana.*</default-schemas>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - jagamana@localhost" uuid="03627d6d-6a66-47e6-a649-42ccc4c9a69a">
+    <database-info product="MySQL" version="5.6.16" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="jagamana"/>
+    <table name="jm_achievement" schema="" catalog="jagamana" type="TABLE">
+      <column name="ach_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ach_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ach_award" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ach_description" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ach_earned" sqlType="YEAR" precision="0" scale="0" nullable="false" jdbcType="91"/>
+      <column name="ach_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="ach_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="ach_id,ach_company"/>
+      <foreign-key name="fk_jm_achievment_jm_company1" columns="ach_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_achievment_jm_company1_idx" unique="false" columns="ach_company"/>
+    </table>
+    <table name="jm_administrator" schema="" catalog="jagamana" type="TABLE">
+      <column name="adm_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="adm_name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="adm_username" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="adm_password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="adm_avatar" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="J25vaW1hZ2UuanBnJw=="/>
+      <column name="adm_gender" sqlType="ENUM" precision="6" scale="0" nullable="false" jdbcType="1" def="J01BTEUn"/>
+      <column name="adm_about" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="adm_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="adm_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="adm_id"/>
+      <exported-key name="fk_jm_application_jm_admin1" table="jm_application" schema="" catalog="jagamana" columns="apl_authorized_by"/>
+      <exported-key name="fk_jm_setting_jm_admin1" table="jm_setting" schema="" catalog="jagamana" columns="stg_admin"/>
+    </table>
+    <table name="jm_application" schema="" catalog="jagamana" type="TABLE">
+      <column name="apl_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="apl_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="apl_job" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="apl_authorized_by" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="apl_status" sqlType="ENUM" precision="8" scale="0" nullable="false" jdbcType="1" def="J1BFTkRJTkcn"/>
+      <column name="apl_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="apl_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="apl_id,apl_employee"/>
+      <foreign-key name="fk_jm_application_jm_admin1" columns="apl_authorized_by" ref-table="jm_administrator" ref-schema="" ref-catalog="jagamana" ref-columns="adm_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_application_jm_company_job1" columns="apl_job" ref-table="jm_job" ref-schema="" ref-catalog="jagamana" ref-columns="job_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_application_jm_empoyee1" columns="apl_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_application_jm_admin1_idx" unique="false" columns="apl_authorized_by"/>
+      <index name="fk_jm_application_jm_company_job1_idx" unique="false" columns="apl_job"/>
+      <index name="fk_jm_application_jm_empoyee1_idx" unique="false" columns="apl_employee"/>
+    </table>
+    <table name="jm_bookmark" schema="" catalog="jagamana" type="TABLE">
+      <column name="bmk_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="bmk_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="bmk_job" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="bmk_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="bmk_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="bmk_id,bmk_employee"/>
+      <foreign-key name="fk_jm_bookmark_jm_company_job1" columns="bmk_job" ref-table="jm_job" ref-schema="" ref-catalog="jagamana" ref-columns="job_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_bookmark_jm_empoyee1" columns="bmk_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_bookmark_jm_company_job1_idx" unique="false" columns="bmk_job"/>
+      <index name="fk_jm_bookmark_jm_empoyee1_idx" unique="false" columns="bmk_employee"/>
+    </table>
+    <table name="jm_category" schema="" catalog="jagamana" type="TABLE">
+      <column name="ctg_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ctg_topic" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ctg_description" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ctg_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="ctg_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="ctg_id"/>
+      <exported-key name="fk_jm_thread_jm_category1" table="jm_thread" schema="" catalog="jagamana" columns="thr_category"/>
+    </table>
+    <table name="jm_city" schema="" catalog="jagamana" type="TABLE">
+      <column name="cty_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cty_city" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cty_state" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cty_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cty_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cty_id,cty_state"/>
+      <foreign-key name="fk_jm_city_jm_state1" columns="cty_state" ref-table="jm_state" ref-schema="" ref-catalog="jagamana" ref-columns="stt_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_jm_company_jm_city1" table="jm_company" schema="" catalog="jagamana" columns="cmp_location"/>
+      <exported-key name="fk_jm_company_job_jm_city1" table="jm_job" schema="" catalog="jagamana" columns="job_location"/>
+      <index name="fk_jm_city_jm_state1_idx" unique="false" columns="cty_state"/>
+    </table>
+    <table name="jm_comment" schema="" catalog="jagamana" type="TABLE">
+      <column name="cmt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cmt_thread" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cmt_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cmt_email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cmt_comment" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="cmt_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cmt_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cmt_id,cmt_thread"/>
+      <foreign-key name="fk_jm_comment_jm_thread1" columns="cmt_thread" ref-table="jm_thread" ref-schema="" ref-catalog="jagamana" ref-columns="thr_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_comment_jm_thread1_idx" unique="false" columns="cmt_thread"/>
+    </table>
+    <table name="jm_company" schema="" catalog="jagamana" type="TABLE">
+      <column name="cmp_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cmp_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cmp_email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cmp_password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cmp_token" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cmp_status" sqlType="ENUM" precision="8" scale="0" nullable="false" jdbcType="1" def="J1BFTkRJTkcn"/>
+      <column name="cmp_notification" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="cmp_auto_approve" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="cmp_logo" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="J25vaW1hZ2UuanBnJw=="/>
+      <column name="cmp_description" sqlType="VARCHAR" precision="350" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_field" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cmp_size" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cmp_location" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cmp_contact" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_address" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_website" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_facebook" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_twiter" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_google" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_linkedin" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cmp_lat" sqlType="DECIMAL" precision="10" scale="8" nullable="true" jdbcType="3"/>
+      <column name="cmp_lng" sqlType="DECIMAL" precision="11" scale="8" nullable="true" jdbcType="3"/>
+      <column name="cmp_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cmp_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cmp_id"/>
+      <foreign-key name="fk_jm_company_jm_city1" columns="cmp_location" ref-table="jm_city" ref-schema="" ref-catalog="jagamana" ref-columns="cty_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_company_jm_company_field1" columns="cmp_field" ref-table="jm_company_field" ref-schema="" ref-catalog="jagamana" ref-columns="cfd_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_company_jm_company_size1" columns="cmp_size" ref-table="jm_company_size" ref-schema="" ref-catalog="jagamana" ref-columns="csz_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_jm_achievment_jm_company1" table="jm_achievement" schema="" catalog="jagamana" columns="ach_company"/>
+      <exported-key name="fk_jm_company_activity_jm_company1" table="jm_company_activity" schema="" catalog="jagamana" columns="cac_company"/>
+      <exported-key name="fk_jm_company_photo_jm_company1" table="jm_company_photo" schema="" catalog="jagamana" columns="cph_company"/>
+      <exported-key name="fk_jm_section_jm_company1" table="jm_company_section" schema="" catalog="jagamana" columns="cst_company"/>
+      <exported-key name="fk_jm_company_task_jm_company" table="jm_company_task" schema="" catalog="jagamana" columns="cts_company"/>
+      <exported-key name="fk_jm_follower_jm_company1" table="jm_follower" schema="" catalog="jagamana" columns="flw_company"/>
+      <exported-key name="fk_jm_company_job_jm_company1" table="jm_job" schema="" catalog="jagamana" columns="job_company"/>
+      <exported-key name="fk_jm_people_jm_company1" table="jm_people" schema="" catalog="jagamana" columns="plp_company"/>
+      <index name="fk_jm_company_jm_city1_idx" unique="false" columns="cmp_location"/>
+      <index name="fk_jm_company_jm_company_field1_idx" unique="false" columns="cmp_field"/>
+      <index name="fk_jm_company_jm_company_size1_idx" unique="false" columns="cmp_size"/>
+    </table>
+    <table name="jm_company_activity" schema="" catalog="jagamana" type="TABLE">
+      <column name="cac_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cac_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cac_activity" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cac_message" sqlType="VARCHAR" precision="1000" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cac_type" sqlType="ENUM" precision="12" scale="0" nullable="false" jdbcType="1" def="J0FDVElWSVRZJw=="/>
+      <column name="cac_readed" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="cac_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cac_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cac_id,cac_company"/>
+      <foreign-key name="fk_jm_company_activity_jm_company1" columns="cac_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_company_activity_jm_company1_idx" unique="false" columns="cac_company"/>
+    </table>
+    <table name="jm_company_field" schema="" catalog="jagamana" type="TABLE">
+      <column name="cfd_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cfd_field" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cfd_description" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cfd_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cfd_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cfd_id"/>
+      <exported-key name="fk_jm_company_jm_company_field1" table="jm_company" schema="" catalog="jagamana" columns="cmp_field"/>
+    </table>
+    <table name="jm_company_photo" schema="" catalog="jagamana" type="TABLE">
+      <column name="cph_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cph_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cph_title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cph_resource" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cph_type" sqlType="ENUM" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="cph_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cph_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cph_id,cph_company"/>
+      <foreign-key name="fk_jm_company_photo_jm_company1" columns="cph_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_company_photo_jm_company1_idx" unique="false" columns="cph_company"/>
+    </table>
+    <table name="jm_company_section" schema="" catalog="jagamana" type="TABLE">
+      <column name="cst_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cst_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cst_section" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cst_title" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cst_description" sqlType="VARCHAR" precision="2000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cst_featured" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cst_active" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="cst_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cst_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cst_id,cst_company"/>
+      <foreign-key name="fk_jm_section_jm_company1" columns="cst_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_section_jm_section_category1" columns="cst_section" ref-table="jm_section" ref-schema="" ref-catalog="jagamana" ref-columns="sct_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_section_jm_company1_idx" unique="false" columns="cst_company"/>
+      <index name="fk_jm_section_jm_section_category1_idx" unique="false" columns="cst_section"/>
+    </table>
+    <table name="jm_company_size" schema="" catalog="jagamana" type="TABLE">
+      <column name="csz_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="csz_size" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="csz_description" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="csz_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="csz_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="csz_id"/>
+      <exported-key name="fk_jm_company_jm_company_size1" table="jm_company" schema="" catalog="jagamana" columns="cmp_size"/>
+    </table>
+    <table name="jm_company_task" schema="" catalog="jagamana" type="TABLE">
+      <column name="cts_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="cts_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cts_task" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cts_description" sqlType="VARCHAR" precision="500" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cts_featured" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cts_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="cts_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="cts_id,cts_company"/>
+      <foreign-key name="fk_jm_company_task_jm_company" columns="cts_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_company_task_jm_company_idx" unique="false" columns="cts_company"/>
+    </table>
+    <table name="jm_country" schema="" catalog="jagamana" type="TABLE">
+      <column name="ctr_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ctr_country" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ctr_code" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ctr_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="ctr_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="ctr_id"/>
+      <exported-key name="fk_jm_state_jm_country1" table="jm_state" schema="" catalog="jagamana" columns="stt_country"/>
+    </table>
+    <table name="jm_education" schema="" catalog="jagamana" type="TABLE">
+      <column name="edc_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="edc_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="edc_education" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="edc_year_begin" sqlType="YEAR" precision="0" scale="0" nullable="false" jdbcType="91"/>
+      <column name="edc_year_until" sqlType="VARCHAR" precision="4" scale="0" nullable="false" jdbcType="12"/>
+      <column name="edc_institution" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="edc_location" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="edc_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="edc_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="edc_id,edc_employee"/>
+      <foreign-key name="fk_jm_education_jm_empoyee1" columns="edc_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_education_jm_empoyee1_idx" unique="false" columns="edc_employee"/>
+    </table>
+    <table name="jm_employee" schema="" catalog="jagamana" type="TABLE">
+      <column name="emp_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="emp_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="emp_email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="emp_password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="emp_token" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="emp_avatar" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="J25vaW1hZ2UuanBnJw=="/>
+      <column name="emp_status" sqlType="ENUM" precision="8" scale="0" nullable="false" jdbcType="1" def="J1BFTkRJTkcn"/>
+      <column name="emp_notification" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="emp_birthday" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="emp_nationality" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_address" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_contact" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_website" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_gender" sqlType="ENUM" precision="6" scale="0" nullable="true" jdbcType="1"/>
+      <column name="emp_about" sqlType="VARCHAR" precision="2000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_resume" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emp_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="emp_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="emp_id"/>
+      <exported-key name="fk_jm_application_jm_empoyee1" table="jm_application" schema="" catalog="jagamana" columns="apl_employee"/>
+      <exported-key name="fk_jm_bookmark_jm_empoyee1" table="jm_bookmark" schema="" catalog="jagamana" columns="bmk_employee"/>
+      <exported-key name="fk_jm_education_jm_empoyee1" table="jm_education" schema="" catalog="jagamana" columns="edc_employee"/>
+      <exported-key name="fk_jm_activity_jm_empoyee1" table="jm_employee_activity" schema="" catalog="jagamana" columns="eac_employee"/>
+      <exported-key name="fk_jm_experience_jm_empoyee1" table="jm_experience" schema="" catalog="jagamana" columns="exp_employee"/>
+      <exported-key name="fk_jm_follower_jm_empoyee1" table="jm_follower" schema="" catalog="jagamana" columns="flw_employee"/>
+      <exported-key name="fk_jm_portfolio_jm_empoyee1" table="jm_portfolio" schema="" catalog="jagamana" columns="prt_employee"/>
+      <exported-key name="fk_jm_skill_jm_empoyee1" table="jm_skill" schema="" catalog="jagamana" columns="skl_employee"/>
+      <exported-key name="fk_jm_thread_jm_empoyee1" table="jm_thread" schema="" catalog="jagamana" columns="thr_author"/>
+    </table>
+    <table name="jm_employee_activity" schema="" catalog="jagamana" type="TABLE">
+      <column name="eac_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="eac_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="eac_activity" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="eac_message" sqlType="VARCHAR" precision="1000" scale="0" nullable="false" jdbcType="12"/>
+      <column name="eac_type" sqlType="ENUM" precision="12" scale="0" nullable="false" jdbcType="1" def="J0FDVElWSVRZJw=="/>
+      <column name="eac_readed" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="eac_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="eac_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="eac_id,eac_employee"/>
+      <foreign-key name="fk_jm_activity_jm_empoyee1" columns="eac_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_activity_jm_empoyee1_idx" unique="false" columns="eac_employee"/>
+    </table>
+    <table name="jm_experience" schema="" catalog="jagamana" type="TABLE">
+      <column name="exp_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="exp_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="exp_company" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="exp_position" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="exp_description" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="exp_year_begin" sqlType="YEAR" precision="0" scale="0" nullable="false" jdbcType="91"/>
+      <column name="exp_year_until" sqlType="VARCHAR" precision="4" scale="0" nullable="false" jdbcType="12"/>
+      <column name="exp_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="exp_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="exp_id,exp_employee"/>
+      <foreign-key name="fk_jm_experience_jm_empoyee1" columns="exp_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_experience_jm_empoyee1_idx" unique="false" columns="exp_employee"/>
+    </table>
+    <table name="jm_feedback" schema="" catalog="jagamana" type="TABLE">
+      <column name="fdb_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fdb_name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fdb_email" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fdb_message" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="fdb_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="fdb_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="fdb_id"/>
+    </table>
+    <table name="jm_follower" schema="" catalog="jagamana" type="TABLE">
+      <column name="flw_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="flw_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="flw_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="flw_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="flw_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="flw_id,flw_employee,flw_company"/>
+      <foreign-key name="fk_jm_follower_jm_company1" columns="flw_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_follower_jm_empoyee1" columns="flw_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_follower_jm_company1_idx" unique="false" columns="flw_company"/>
+      <index name="fk_jm_follower_jm_empoyee1_idx" unique="false" columns="flw_employee"/>
+    </table>
+    <table name="jm_job" schema="" catalog="jagamana" type="TABLE">
+      <column name="job_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="job_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="job_field" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="job_type" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="job_level" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="job_location" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="job_vacancy" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="job_description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="job_responsibility" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="job_qualification" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="job_status" sqlType="ENUM" precision="7" scale="0" nullable="false" jdbcType="1" def="J0FDVElWRSc="/>
+      <column name="job_open" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="job_close" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="job_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="job_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="job_id,job_company"/>
+      <foreign-key name="fk_jm_company_job_jm_city1" columns="job_location" ref-table="jm_city" ref-schema="" ref-catalog="jagamana" ref-columns="cty_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_company_job_jm_company1" columns="job_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_company_job_jm_job_level1" columns="job_level" ref-table="jm_job_level" ref-schema="" ref-catalog="jagamana" ref-columns="jlv_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_company_job_jm_job_type1" columns="job_field" ref-table="jm_job_field" ref-schema="" ref-catalog="jagamana" ref-columns="jfd_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_job_jm_job_title1" columns="job_type" ref-table="jm_job_type" ref-schema="" ref-catalog="jagamana" ref-columns="jty_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_jm_application_jm_company_job1" table="jm_application" schema="" catalog="jagamana" columns="apl_job"/>
+      <exported-key name="fk_jm_bookmark_jm_company_job1" table="jm_bookmark" schema="" catalog="jagamana" columns="bmk_job"/>
+      <index name="fk_jm_company_job_jm_city1_idx" unique="false" columns="job_location"/>
+      <index name="fk_jm_company_job_jm_company1_idx" unique="false" columns="job_company"/>
+      <index name="fk_jm_company_job_jm_job_level1_idx" unique="false" columns="job_level"/>
+      <index name="fk_jm_company_job_jm_job_type1_idx" unique="false" columns="job_field"/>
+      <index name="fk_jm_job_jm_job_title1_idx" unique="false" columns="job_type"/>
+    </table>
+    <table name="jm_job_field" schema="" catalog="jagamana" type="TABLE">
+      <column name="jfd_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="jfd_field" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="jfd_description" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="jfd_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="jfd_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="jfd_id"/>
+      <exported-key name="fk_jm_company_job_jm_job_type1" table="jm_job" schema="" catalog="jagamana" columns="job_field"/>
+    </table>
+    <table name="jm_job_level" schema="" catalog="jagamana" type="TABLE">
+      <column name="jlv_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="jlv_level" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="jlv_description" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="jlv_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="jlv_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="jlv_id"/>
+      <exported-key name="fk_jm_company_job_jm_job_level1" table="jm_job" schema="" catalog="jagamana" columns="job_level"/>
+    </table>
+    <table name="jm_job_type" schema="" catalog="jagamana" type="TABLE">
+      <column name="jty_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="jty_type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="jty_description" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="jty_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="jty_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="jty_id"/>
+      <exported-key name="fk_jm_job_jm_job_title1" table="jm_job" schema="" catalog="jagamana" columns="job_type"/>
+    </table>
+    <table name="jm_month" schema="" catalog="jagamana" type="TABLE">
+      <column name="mth_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="mth_month" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="mth_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="mth_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="mth_id"/>
+    </table>
+    <table name="jm_people" schema="" catalog="jagamana" type="TABLE">
+      <column name="plp_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="plp_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="plp_name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="plp_position" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="plp_avatar" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="J25vaW1hZ2UuanBnJw=="/>
+      <column name="plp_cover" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="J25vY292ZXIuanBnJw=="/>
+      <column name="plp_about" sqlType="VARCHAR" precision="500" scale="0" nullable="false" jdbcType="12"/>
+      <column name="plp_caption" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="plp_facebook" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_twitter" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_google" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_linkedin" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_contact" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_email" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_website" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_address" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plp_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="plp_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="plp_id,plp_company"/>
+      <foreign-key name="fk_jm_people_jm_company1" columns="plp_company" ref-table="jm_company" ref-schema="" ref-catalog="jagamana" ref-columns="cmp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_jm_people_photo_jm_people1" table="jm_people_photo" schema="" catalog="jagamana" columns="pph_people"/>
+      <exported-key name="fk_jm_people_section_jm_people1" table="jm_people_section" schema="" catalog="jagamana" columns="pst_people"/>
+      <index name="fk_jm_people_jm_company1_idx" unique="false" columns="plp_company"/>
+    </table>
+    <table name="jm_people_photo" schema="" catalog="jagamana" type="TABLE">
+      <column name="pph_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="pph_people" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pph_title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pph_resource" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pph_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="pph_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="pph_id,pph_people"/>
+      <foreign-key name="fk_jm_people_photo_jm_people1" columns="pph_people" ref-table="jm_people" ref-schema="" ref-catalog="jagamana" ref-columns="plp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_people_photo_jm_people1_idx" unique="false" columns="pph_people"/>
+    </table>
+    <table name="jm_people_section" schema="" catalog="jagamana" type="TABLE">
+      <column name="pst_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="pst_people" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pst_section" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="pst_title" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pst_description" sqlType="VARCHAR" precision="2000" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pst_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="pst_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="pst_id,pst_people"/>
+      <foreign-key name="fk_jm_people_section_jm_people1" columns="pst_people" ref-table="jm_people" ref-schema="" ref-catalog="jagamana" ref-columns="plp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_people_section_jm_section1" columns="pst_section" ref-table="jm_section" ref-schema="" ref-catalog="jagamana" ref-columns="sct_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_people_section_jm_people1_idx" unique="false" columns="pst_people"/>
+      <index name="fk_jm_people_section_jm_section1_idx" unique="false" columns="pst_section"/>
+    </table>
+    <table name="jm_portfolio" schema="" catalog="jagamana" type="TABLE">
+      <column name="prt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="prt_title" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="prt_screenshot" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="prt_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="prt_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="prt_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="prt_id,prt_employee"/>
+      <foreign-key name="fk_jm_portfolio_jm_empoyee1" columns="prt_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_portfolio_jm_empoyee1_idx" unique="false" columns="prt_employee"/>
+    </table>
+    <table name="jm_section" schema="" catalog="jagamana" type="TABLE">
+      <column name="sct_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="sct_section" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sct_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="sct_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="sct_id"/>
+      <exported-key name="fk_jm_section_jm_section_category1" table="jm_company_section" schema="" catalog="jagamana" columns="cst_section"/>
+      <exported-key name="fk_jm_people_section_jm_section1" table="jm_people_section" schema="" catalog="jagamana" columns="pst_section"/>
+    </table>
+    <table name="jm_setting" schema="" catalog="jagamana" type="TABLE">
+      <column name="stg_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="stg_key" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="stg_value" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="stg_admin" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="stg_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="stg_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="stg_id"/>
+      <foreign-key name="fk_jm_setting_jm_admin1" columns="stg_admin" ref-table="jm_administrator" ref-schema="" ref-catalog="jagamana" ref-columns="adm_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_setting_jm_admin1_idx" unique="false" columns="stg_admin"/>
+    </table>
+    <table name="jm_skill" schema="" catalog="jagamana" type="TABLE">
+      <column name="skl_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="skl_employee" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="skl_category" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="skl_skill" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="skl_description" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="skl_value" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5"/>
+      <column name="skl_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="skl_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="skl_id,skl_employee"/>
+      <foreign-key name="fk_jm_skill_jm_empoyee1" columns="skl_employee" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_skill_jm_skill_category1" columns="skl_category" ref-table="jm_skill_category" ref-schema="" ref-catalog="jagamana" ref-columns="sct_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_jm_skill_jm_empoyee1_idx" unique="false" columns="skl_employee"/>
+      <index name="fk_jm_skill_jm_skill_category1_idx" unique="false" columns="skl_category"/>
+    </table>
+    <table name="jm_skill_category" schema="" catalog="jagamana" type="TABLE">
+      <column name="sct_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="sct_category" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sct_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="sct_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="sct_id"/>
+      <exported-key name="fk_jm_skill_jm_skill_category1" table="jm_skill" schema="" catalog="jagamana" columns="skl_category"/>
+    </table>
+    <table name="jm_state" schema="" catalog="jagamana" type="TABLE">
+      <column name="stt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="stt_state" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="stt_code" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="stt_country" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="stt_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="stt_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="stt_id,stt_country"/>
+      <foreign-key name="fk_jm_state_jm_country1" columns="stt_country" ref-table="jm_country" ref-schema="" ref-catalog="jagamana" ref-columns="ctr_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_jm_city_jm_state1" table="jm_city" schema="" catalog="jagamana" columns="cty_state"/>
+      <index name="fk_jm_state_jm_country1_idx" unique="false" columns="stt_country"/>
+    </table>
+    <table name="jm_thread" schema="" catalog="jagamana" type="TABLE">
+      <column name="thr_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="thr_title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="thr_content" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="thr_readed" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="thr_status" sqlType="ENUM" precision="10" scale="0" nullable="false" jdbcType="1" def="J1BVQkxJU0hFRCc="/>
+      <column name="thr_category" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="thr_author" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="thr_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="thr_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="thr_id"/>
+      <foreign-key name="fk_jm_thread_jm_category1" columns="thr_category" ref-table="jm_category" ref-schema="" ref-catalog="jagamana" ref-columns="ctg_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_jm_thread_jm_empoyee1" columns="thr_author" ref-table="jm_employee" ref-schema="" ref-catalog="jagamana" ref-columns="emp_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_jm_comment_jm_thread1" table="jm_comment" schema="" catalog="jagamana" columns="cmt_thread"/>
+      <index name="fk_jm_thread_jm_category1_idx" unique="false" columns="thr_category"/>
+      <index name="fk_jm_thread_jm_empoyee1_idx" unique="false" columns="thr_author"/>
+    </table>
+    <table name="jm_view_application" schema="" catalog="jagamana" type="VIEW">
+      <column name="application_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="employee_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="employee" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="job_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="vacancy" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="company_id" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="company" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="ENUM" precision="8" scale="0" nullable="false" jdbcType="1" def="J1BFTkRJTkcn"/>
+      <column name="authorized_by_id" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="authorized_by" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="jm_view_bookmark" schema="" catalog="jagamana" type="VIEW">
+      <column name="bookmark_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="employee_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="employee" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="company_id" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="company" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="job_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="vacancy" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="jm_view_category" schema="" catalog="jagamana" type="VIEW">
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="category" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="thread" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="jm_view_company" schema="" catalog="jagamana" type="VIEW">
+      <column name="company_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="company" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="field_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="field" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="city_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="city" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="state_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="state" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="country_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="country" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="size_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="size" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="description" sqlType="VARCHAR" precision="350" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="featured" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="follower" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="jm_view_company_featured" schema="" catalog="jagamana" type="VIEW">
+      <column name="cph_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="cph_company" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cph_title" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cph_resource" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="jm_view_follower" schema="" catalog="jagamana" type="VIEW">
+      <column name="follower_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="company_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="company" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="logo" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="J25vaW1hZ2UuanBnJw=="/>
+      <column name="employee_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="employee" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="avatar" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="J25vaW1hZ2UuanBnJw=="/>
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="jm_view_job" schema="" catalog="jagamana" type="VIEW">
+      <column name="job_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="vacancy" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="company_id" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="company" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="field_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="field" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="level_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="level" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="type_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="type" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="city_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="city" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="state_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="state" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="country_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="country" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="featured" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="applicant" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="jm_view_location" schema="" catalog="jagamana" type="VIEW">
+      <column name="cty_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="cty_city" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="stt_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="stt_state" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ctr_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="ctr_code" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ctr_country" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+    </table>
+    <table name="jm_view_thread" schema="" catalog="jagamana" type="VIEW">
+      <column name="thread_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="content" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="readed" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="status" sqlType="ENUM" precision="10" scale="0" nullable="false" jdbcType="1" def="J1BVQkxJU0hFRCc="/>
+      <column name="category_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="category" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="author_id" sqlType="VARCHAR" precision="32" scale="0" nullable="true" jdbcType="12"/>
+      <column name="author" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="comment" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="MA=="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+    </table>
+    <table name="jm_visitor" schema="" catalog="jagamana" type="TABLE">
+      <column name="vst_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="vst_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="vst_visitor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="vst_hit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="vst_created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="vst_updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="vst_id"/>
+    </table>
+  </data-source>
+</component>
